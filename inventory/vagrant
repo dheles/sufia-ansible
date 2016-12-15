@@ -1,0 +1,11 @@
+# dev (vagrant):
+# ------------------
+[app]
+sufia.test.dev
+
+#[db]
+#db.test.dev
+
+[dev:children]
+app
+#db
