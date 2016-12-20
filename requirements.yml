@@ -7,3 +7,6 @@
 
 - src: https://github.com/dheles/ansible-role-secure-ssh
   name: secure-ssh
+
+- src: https://github.com/dheles/ansible-role-postgres.git
+  name: postgres

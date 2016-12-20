@@ -3,8 +3,8 @@
 [app]
 sufia.test.dev
 
-#[db]
-#db.test.dev
+[db]
+sufia.test.dev
 
 [dev:children]
 app

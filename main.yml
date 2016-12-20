@@ -1,2 +1,2 @@
 ---
-# include project playbooks here
+- include: playbooks/database.yml
