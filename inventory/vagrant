@@ -6,6 +6,10 @@ sufia.test.dev
 [db]
 sufia.test.dev
 
+[solr]
+sufia.test.dev
+
 [dev:children]
 app
 #db
+#solr

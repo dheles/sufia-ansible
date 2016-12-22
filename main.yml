@@ -1,2 +1,3 @@
 ---
 - include: playbooks/database.yml
+- include: playbooks/solr.yml

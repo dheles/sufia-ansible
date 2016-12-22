@@ -10,3 +10,9 @@
 
 - src: https://github.com/dheles/ansible-role-postgres.git
   name: postgres
+
+- src: https://github.com/dheles/ansible-role-java.git
+  name: java
+
+- src: https://github.com/dheles/ansible-role-solr.git
+  name: solr

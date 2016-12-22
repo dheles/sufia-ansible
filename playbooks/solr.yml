@@ -1,0 +1,7 @@
+---
+- hosts: solr
+  become: true
+
+  roles:
+  - { role: java }
+  - { role: solr }
