@@ -49,11 +49,16 @@ Vagrant.configure(2) do |config|
       end
 
       if setup_complete
+        # workaround for https://github.com/mitchellh/vagrant/issues/8142
+        host.vm.provision "shell",
+          inline: "sudo service network restart"
+
         host.vm.provision "ansible" do |ansible|
           ansible.galaxy_role_file = "requirements.yml"
           ansible.inventory_path = "inventory/vagrant"
           ansible.playbook = "setup.yml"
           ansible.limit = "all"
+          # ansible.verbose ="vvv"
         end
       end
     end
