@@ -1,0 +1,8 @@
+---
+- hosts: fedora
+  become: true
+
+  roles:
+  - { role: java }
+  - { role: tomcat }
+  # - { role: fedora-commons }

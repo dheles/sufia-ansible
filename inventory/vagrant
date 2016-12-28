@@ -9,7 +9,11 @@ sufia.test.dev
 [solr]
 sufia.test.dev
 
+[fedora]
+sufia.test.dev
+
 [dev:children]
 app
 #db
 #solr
+#fedora
