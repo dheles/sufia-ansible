@@ -3,6 +3,7 @@
   become: true
 
   roles:
-  - { role: java }
+  - { role: java, jdk: true }
   - { role: tomcat }
+  - { role: maven }
   # - { role: fedora-commons }
