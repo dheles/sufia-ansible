@@ -2,4 +2,5 @@
 environ:  "dev" # dev || stage || prod
 
 # private vars
-login_user_passphrase: "{{ vault_login_user_passphrase }}"
+login_user_passphrase:  "{{ vault_login_user_passphrase }}"
+tomcat_users:           "{{ vault_tomcat_users }}"

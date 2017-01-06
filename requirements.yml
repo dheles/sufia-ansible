@@ -20,5 +20,5 @@
 - src: https://github.com/dheles/ansible-role-tomcat.git
   name: tomcat
 
-- src: https://github.com/dheles/ansible-role-maven.git
-  name: maven
+- src: https://github.com/dheles/ansible-role-psi-probe.git
+  name: psi-probe
