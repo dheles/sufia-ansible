@@ -6,4 +6,4 @@
   - { role: java }
   - { role: tomcat }
   - { role: psi-probe }
-  # - { role: fedora-commons }
+  - { role: fcrepo }

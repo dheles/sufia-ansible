@@ -22,3 +22,6 @@
 
 - src: https://github.com/dheles/ansible-role-psi-probe.git
   name: psi-probe
+
+- src: https://github.com/dheles/ansible-role-fcrepo.git
+  name: fcrepo

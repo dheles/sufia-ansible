@@ -4,3 +4,20 @@ environ:  "dev" # dev || stage || prod
 # private vars
 login_user_passphrase:  "{{ vault_login_user_passphrase }}"
 tomcat_users:           "{{ vault_tomcat_users }}"
+
+catalina_opts:          "-server
+                        -Dcom.sun.management.jmxremote=true"
+
+java_opts:              "-Djava.awt.headless=true
+                        -Dfile.encoding=UTF-8
+                        -Dfcrepo.home={{ fcrepo_home }}
+                        -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json
+                        -Dlogback.configurationFile={{ fcrepo_config_dir }}/logback.xml
+                        -XX:+UseConcMarkSweepGC
+                        -XX:+CMSClassUnloadingEnabled
+                        -XX:ConcGCThreads=5
+                        -XX:MaxGCPauseMillis=200
+                        -XX:ParallelGCThreads=20
+                        -XX:MaxMetaspaceSize=512M
+                        -Xms{{ minimum_heap_size }}m
+                        -Xmx{{ maximum_heap_size }}m"
