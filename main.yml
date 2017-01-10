@@ -2,3 +2,4 @@
 - include: playbooks/database.yml
 - include: playbooks/solr.yml
 - include: playbooks/fedora.yml
+- include: playbooks/app.yml

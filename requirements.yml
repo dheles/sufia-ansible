@@ -25,3 +25,6 @@
 
 - src: https://github.com/dheles/ansible-role-fcrepo.git
   name: fcrepo
+
+- src: https://github.com/dheles/ansible-role-redis.git
+  name: redis
