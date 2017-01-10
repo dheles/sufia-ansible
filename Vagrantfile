@@ -12,13 +12,10 @@ OS="centos" # "debian" || "centos"
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure(2) do |config|
-  package=""
   if OS=="debian"
     config.vm.box = "debian/jessie64"
-    package="_apt"
   elsif OS=="centos"
     config.vm.box = "centos/7"
-    package="_yum"
   else
     puts "you must set the OS variable to a valid value before continuing"
     exit
@@ -49,9 +46,11 @@ Vagrant.configure(2) do |config|
       end
 
       if setup_complete
-        # workaround for https://github.com/mitchellh/vagrant/issues/8142
-        host.vm.provision "shell",
-          inline: "sudo service network restart"
+        if OS=="centos"
+          # workaround for https://github.com/mitchellh/vagrant/issues/8142
+          host.vm.provision "shell",
+            inline: "sudo service network restart"
+        end
 
         host.vm.provision "ansible" do |ansible|
           ansible.galaxy_role_file = "requirements.yml"
