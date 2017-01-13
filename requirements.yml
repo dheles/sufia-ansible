@@ -28,3 +28,6 @@
 
 - src: https://github.com/dheles/ansible-role-redis.git
   name: redis
+
+- src: https://github.com/dheles/ansible-role-imagemagick.git
+  name: imagemagick
