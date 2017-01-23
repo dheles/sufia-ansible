@@ -31,3 +31,6 @@
 
 - src: https://github.com/dheles/ansible-role-imagemagick.git
   name: imagemagick
+
+- src: https://github.com/dheles/ansible-role-ruby.git
+  name: ruby
