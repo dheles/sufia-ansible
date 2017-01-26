@@ -34,3 +34,6 @@
 
 - src: https://github.com/dheles/ansible-role-ruby.git
   name: ruby
+
+- src: https://github.com/dheles/ansible-role-fits.git
+  name: fits
