@@ -7,3 +7,4 @@
   - { role: imagemagick }
   - { role: ruby, ruby_from_source: true }
   - { role: fits }
+  - { role: libreoffice }
