@@ -3,8 +3,14 @@
   become: true
 
   roles:
-  - { role: redis }
-  - { role: imagemagick }
+  # - { role: redis }
+  # - { role: imagemagick }
+  # - { role: fits }
+  # - { role: libreoffice }
   - { role: ruby, ruby_from_source: true }
-  - { role: fits }
-  - { role: libreoffice }
+
+- hosts: app
+  become: false
+
+  roles:
+  - { role: sufia }

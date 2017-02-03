@@ -32,11 +32,14 @@
 - src: https://github.com/dheles/ansible-role-imagemagick.git
   name: imagemagick
 
-- src: https://github.com/dheles/ansible-role-ruby.git
-  name: ruby
-
 - src: https://github.com/dheles/ansible-role-fits.git
   name: fits
 
 - src: https://github.com/dheles/ansible-role-libreoffice.git
   name: libreoffice
+
+- src: https://github.com/dheles/ansible-role-ruby.git
+  name: ruby
+
+- src: https://github.com/dheles/ansible-role-sufia.git
+  name: sufia
