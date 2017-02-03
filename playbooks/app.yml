@@ -3,10 +3,10 @@
   become: true
 
   roles:
-  # - { role: redis }
-  # - { role: imagemagick }
-  # - { role: fits }
-  # - { role: libreoffice }
+  - { role: redis }
+  - { role: imagemagick }
+  - { role: fits }
+  - { role: libreoffice }
   - { role: ruby, ruby_from_source: true }
 
 - hosts: app
