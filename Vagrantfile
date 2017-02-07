@@ -40,6 +40,18 @@ Vagrant.configure(2) do |config|
         vb.name = "#{short_name}.#{domain}"
         vb.memory = 1024
         vb.linked_clone = true
+
+        # NOTE: will need refactoring if separating into multiple VMs
+        # port forwarding solr:
+        host.vm.network "forwarded_port", guest: 8983, host: 8983, auto_correct: true
+        # port forwarding fedora (via tomcat):
+        host.vm.network "forwarded_port", guest: 8080, host: 8888, auto_correct: true
+        # port forwarding sufia (puma):
+        host.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+        # port forwarding sufia (http):
+        host.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+        # port forwarding sufia (https):
+        host.vm.network "forwarded_port", guest: 443, host: 4443, auto_correct: true
       end
 
       if short_name == "sufia" # last in the list
