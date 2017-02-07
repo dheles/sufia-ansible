@@ -3,6 +3,7 @@
 
 domain          = "test.dev"
 setup_complete  = false
+deploy_dir      = "/opt/sufia"
 
 # NOTE: currently using the same OS for all boxen
 OS="centos" # "debian" || "centos"
@@ -59,6 +60,11 @@ Vagrant.configure(2) do |config|
           ansible.limit = "all"
           # ansible.verbose ="vvv"
         end
+
+        # NOTE: nfs synced_folder is broken in vagrant 1.9.1.
+        # must downgrade to 1.9.0 for this to work
+        # https://github.com/mitchellh/vagrant/issues/8138
+        host.vm.synced_folder "project-code", "#{deploy_dir}", type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'], map_uid: 0, map_gid: 0
       end
     end
   end

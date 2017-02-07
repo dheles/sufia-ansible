@@ -9,3 +9,5 @@
 roles/*
 !roles/README.md
 !roles/local.*
+project-code/*
+!project-code/.keep
