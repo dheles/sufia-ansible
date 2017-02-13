@@ -5,6 +5,18 @@ environ:  "dev" # dev || stage || prod
 login_user_passphrase:  "{{ vault_login_user_passphrase }}"
 tomcat_users:           "{{ vault_tomcat_users }}"
 
+# sufia role vars
+sufia_mode:             "prod_like"
+sufia_rebuild:          true
+sufia_redeploy:         true
+
+# solr vars
+solr_cores:
+  - "hydra-development"
+solr_version:         6.4.1
+solr_user:            "solr"
+
+# tomcat vars
 catalina_opts:          "-server
                         -Dcom.sun.management.jmxremote=true"
 
