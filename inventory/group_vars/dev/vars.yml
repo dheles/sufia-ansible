@@ -13,8 +13,14 @@ sufia_redeploy:         true
 # solr vars
 solr_cores:
   - "hydra-development"
-solr_version:         6.4.1
-solr_user:            "solr"
+solr_version:           6.4.1
+solr_user:              "solr"
+
+# apache vars:
+hostname:               "sufia"
+domainname:             "test.dev"
+apache_https:           true
+ssl_self_sign_cert:     true
 
 # tomcat vars
 catalina_opts:          "-server

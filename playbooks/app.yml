@@ -13,4 +13,5 @@
   become: false
 
   roles:
+  - { role: apache }
   - { role: sufia }

@@ -41,5 +41,8 @@
 - src: https://github.com/dheles/ansible-role-ruby.git
   name: ruby
 
+- src: https://github.com/dheles/ansible-role-apache.git
+  name: apache
+
 - src: https://github.com/dheles/ansible-role-sufia.git
   name: sufia
