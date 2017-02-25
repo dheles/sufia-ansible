@@ -3,7 +3,7 @@
 
 domain          = "test.dev"
 setup_complete  = false
-deploy_dir      = "/opt/sufia"
+deploy_dir      = "/var/www/html"
 
 # NOTE: currently using the same OS for all boxen
 OS="centos" # "debian" || "centos"
@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
 
       host.vm.provider "virtualbox" do |vb|
         vb.name = "#{short_name}.#{domain}"
-        vb.memory = 1024
+        vb.memory = 2048
         vb.linked_clone = true
 
         # NOTE: will need refactoring if separating into multiple VMs

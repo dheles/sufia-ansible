@@ -44,5 +44,8 @@
 - src: https://github.com/dheles/ansible-role-apache.git
   name: apache
 
+- src: https://github.com/dheles/ansible-role-passenger.git
+  name: passenger
+
 - src: https://github.com/dheles/ansible-role-sufia.git
   name: sufia

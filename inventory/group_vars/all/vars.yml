@@ -10,3 +10,9 @@ login_user:     "deploy"
 ssh_port: 22
 # uncomment after first run (if not 22):
 # ansible_ssh_port: "{{ ssh_port }}"
+
+# deployment vars
+app_name:         "sufia"
+app_user:         "{{ app_name }}"
+base_deploy_dir:  "/opt"
+# deploy_dir:       "{{ base_deploy_dir }}/{{ app_name }}"

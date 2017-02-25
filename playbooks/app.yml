@@ -11,7 +11,10 @@
 
 - hosts: app
   become: false
+  environment:
+    RAILS_ENV: "{{ rails_env }}"
 
   roles:
   - { role: apache }
+  - { role: passenger }
   - { role: sufia }
