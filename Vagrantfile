@@ -46,6 +46,8 @@ Vagrant.configure(2) do |config|
         host.vm.network "forwarded_port", guest: 8983, host: 8983, auto_correct: true
         # port forwarding fedora (via tomcat):
         host.vm.network "forwarded_port", guest: 8080, host: 8888, auto_correct: true
+        # port forwarding postgres
+        host.vm.network "forwarded_port", guest: 5432, host: 5432, auto_correct: true
         # port forwarding sufia (puma):
         host.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
         # port forwarding sufia (http):

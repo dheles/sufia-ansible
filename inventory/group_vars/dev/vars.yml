@@ -22,6 +22,27 @@ sufia_mode:             "prod_like" # dev | prod_like
 sufia_rebuild:          true
 sufia_redeploy:         true
 
+# database vars
+db_provider:            "postgresql"
+db_admin_user:          "postgres"
+db_create_users:        true
+ # TODO: review - is there an expected db username?
+db_users:
+  - user:               "sufia"
+    pass:               "{{ vault_db_password }}"
+    flags:              "CREATEDB,NOSUPERUSER"
+db_create_databases:    true
+db_databases:
+  - name:               "sufia"
+    encoding:           "UTF-8"
+    owner:              "sufia"
+postgres_hba_entries:
+  - type:               "local"
+    database:           "sufia"
+    user:               "sufia"
+    address:            ""
+    method:             "md5"
+
 # solr vars
 solr_cores:
   - "hydra-development"
