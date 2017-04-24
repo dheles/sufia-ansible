@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-domain          = "test.dev"
+domain          = "test.test"
 setup_complete  = false
 deploy_dir      = "/var/www/html"
 
@@ -39,6 +39,7 @@ Vagrant.configure(2) do |config|
       host.vm.provider "virtualbox" do |vb|
         vb.name = "#{short_name}.#{domain}"
         vb.memory = 2048
+        # vb.cpus   = 2
         vb.linked_clone = true
 
         # NOTE: will need refactoring if separating into multiple VMs

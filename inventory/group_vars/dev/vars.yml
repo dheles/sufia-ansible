@@ -54,7 +54,7 @@ solr_user:              "solr"
 
 # apache vars:
 hostname:               "sufia"
-domainname:             "test.dev"
+domainname:             "test.test"
 apache_remove_welcome:  true
 apache_https:           true
 ssl_self_sign_cert:     true

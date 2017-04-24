@@ -1,16 +1,16 @@
 # dev (vagrant):
 # ------------------
 [app]
-sufia.test.dev
+sufia.test.test
 
 [db]
-sufia.test.dev
+sufia.test.test
 
 [solr]
-sufia.test.dev
+sufia.test.test
 
 [fedora]
-sufia.test.dev
+sufia.test.test
 
 [dev:children]
 app
