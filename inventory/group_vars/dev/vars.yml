@@ -61,6 +61,8 @@ ssl_self_sign_cert:     true
 update_packages: false
 
 # tomcat vars
+tomcat_major_version:   7
+tomcat_version:         7.0.75
 catalina_opts:          "-server
                         -Dcom.sun.management.jmxremote=true"
 
@@ -68,12 +70,11 @@ java_opts:              "-Djava.awt.headless=true
                         -Dfile.encoding=UTF-8
                         -Dfcrepo.home={{ fcrepo_home }}
                         -Dfcrepo.modeshape.configuration=classpath:/config/file-simple/repository.json
-                        -Dlogback.configurationFile={{ fcrepo_config_dir }}/logback.xml
-                        -XX:+UseConcMarkSweepGC
-                        -XX:+CMSClassUnloadingEnabled
-                        -XX:ConcGCThreads=5
-                        -XX:MaxGCPauseMillis=200
-                        -XX:ParallelGCThreads=20
-                        -XX:MaxMetaspaceSize=512M
                         -Xms{{ minimum_heap_size }}m
-                        -Xmx{{ maximum_heap_size }}m"
+                        -Xmx{{ maximum_heap_size }}m
+                        -XX:NewSize=256m
+                        -XX:MaxNewSize=256m
+                        -XX:MetaspaceSize=256m
+                        -XX:MaxMetaspaceSize=256m
+                        -XX:+DisableExplicitGC"
+                        # -Dlogback.configurationFile={{ fcrepo_config_dir }}/logback.xml
