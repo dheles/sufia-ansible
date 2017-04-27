@@ -17,4 +17,4 @@
   roles:
   - { role: apache }
   - { role: passenger }
-  - { role: sufia }
+  - { role: hyrax }

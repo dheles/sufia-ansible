@@ -47,5 +47,8 @@
 - src: https://github.com/dheles/ansible-role-passenger.git
   name: passenger
 
-- src: https://github.com/dheles/ansible-role-sufia.git
-  name: sufia
+# - src: https://github.com/dheles/ansible-role-sufia.git
+#   name: sufia
+
+- src: https://github.com/dheles/hyrax-ansible-role.git
+  name: hyrax
