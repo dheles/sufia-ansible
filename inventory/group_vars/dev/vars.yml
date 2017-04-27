@@ -47,6 +47,7 @@ postgres_hba_entries:
     method:             "md5"
 
 # solr vars
+# NOTE: at present, only configuring for a single core
 solr_cores:
   - "hydra-development"
 solr_version:           6.4.1
