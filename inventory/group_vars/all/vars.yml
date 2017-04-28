@@ -11,8 +11,14 @@ ssh_port: 22
 # uncomment after first run (if not 22):
 # ansible_ssh_port: "{{ ssh_port }}"
 
-# deployment vars
+# build / deployment vars
+# NOTE: build_app and get_app are mutually exclusive, though both can reasonably be set to false, if an app already exists in the build directory
+# TODO: consider whether the ability to compare built and repoed apps would be worthwhile
+build_app:        true
+get_app:          false
 app_name:         "sufia"
 app_user:         "{{ app_name }}"
+app_repo:         "https://github.com/dheles/hyrax-JHU"
+app_branch:       "master"
 base_deploy_dir:  "/opt"
 # deploy_dir:       "{{ base_deploy_dir }}/{{ app_name }}"
