@@ -22,3 +22,7 @@ app_repo:         "https://github.com/dheles/hyrax-JHU"
 app_branch:       "master"
 base_deploy_dir:  "/opt"
 # deploy_dir:       "{{ base_deploy_dir }}/{{ app_name }}"
+
+# FIXME: temporarily use a mirror for libreoffice
+libreoffice_url:                  "http://mirror.clarkson.edu/tdf/libreoffice/stable/{{ libreoffice_version }}/{{ package }}/{{ architecture }}/{{ libreoffice_download_file }}"
+libreoffice_checksum_override:    "3afba7609147da7af5aa7a0de547d8ee7b7c2f639e7e20da42bc924ea4c13b1b"
