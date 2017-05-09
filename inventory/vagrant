@@ -1,19 +1,25 @@
 # dev (vagrant):
 # ------------------
-[app]
-sufia.test.test
+[build]
+build.hyrax.test
+
+[deploy]
+deploy.hyrax.test
 
 [db]
-sufia.test.test
+build.hyrax.test
+deploy.hyrax.test
 
 [solr]
-sufia.test.test
+deploy.hyrax.test
 
 [fedora]
-sufia.test.test
+deploy.hyrax.test
+
+[app:children]
+build
+deploy
 
 [dev:children]
-app
-#db
-#solr
-#fedora
+build
+deploy

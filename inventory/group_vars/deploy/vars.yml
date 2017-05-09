@@ -2,7 +2,7 @@
 environ:  "dev" # dev || stage || prod
 breaking_stuff_is_ok:   true
 # NOTE: stage is a production rails env (https://devcenter.heroku.com/articles/deploying-to-a-custom-rails-environment)
-rails_env:              "development" # development | test | production
+rails_env:              "production" # development | test | production
 
 # private vars
 login_user_passphrase:  "{{ vault_login_user_passphrase }}"
@@ -20,8 +20,10 @@ ruby_from_source:       true
 # sufia role vars
 sufia_version:          "7.3.0" # 7.2.0 | 7.3.0.rc1
 sufia_mode:             "prod_like" # dev | prod_like
-sufia_rebuild:          true
+sufia_rebuild:          false
 sufia_redeploy:         true
+build_app:              false
+get_app:                true
 # NOTE: this particular override works for version 7.3.x, but not 7.2.x (which has additional requirements)
 # sufia_gems:             "gem 'sufia', '{{ sufia_version }}'"
 
@@ -36,12 +38,28 @@ db_users:
     flags:              "CREATEDB,NOSUPERUSER"
 db_create_databases:    true
 db_databases:
-  - name:               "sufia"
+  # - name:               "sufia_development"
+  #   encoding:           "UTF-8"
+  #   owner:              "sufia"
+  # - name:               "sufia_test"
+  #   encoding:           "UTF-8"
+  #   owner:              "sufia"
+  - name:               "sufia_production"
     encoding:           "UTF-8"
     owner:              "sufia"
 postgres_hba_entries:
+  # - type:               "local"
+  #   database:           "sufia_development"
+  #   user:               "sufia"
+  #   address:            ""
+  #   method:             "md5"
+  # - type:               "local"
+  #   database:           "sufia_test"
+  #   user:               "sufia"
+  #   address:            ""
+  #   method:             "md5"
   - type:               "local"
-    database:           "sufia"
+    database:           "sufia_production"
     user:               "sufia"
     address:            ""
     method:             "md5"
@@ -49,13 +67,14 @@ postgres_hba_entries:
 # solr vars
 # NOTE: at present, only configuring for a single core
 solr_cores:
-  - "hydra-development"
+  # - "hydra-development"
+  - "blacklight-core"
 solr_version:           6.4.1
 solr_user:              "solr"
 
 # apache vars:
-hostname:               "sufia"
-domainname:             "test.test"
+hostname:               "deploy"
+domainname:             "hyrax.test"
 apache_remove_welcome:  true
 apache_https:           true
 ssl_self_sign_cert:     true
@@ -63,6 +82,7 @@ ssl_self_sign_cert:     true
 # passenger vars
  # TODO: adopt and move up
 update_packages: false
+passenger_app_environment:  "production"
 
 # fedora vars
 fcrepo_version:         4.7.1

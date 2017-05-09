@@ -1,8 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-domain          = "test.test"
+domain          = "hyrax.test"
 setup_complete  = false
+build_dir       = "/home/deploy/build"
 deploy_dir      = "/var/www/html"
 
 # NOTE: currently using the same OS for all boxen
@@ -24,8 +25,8 @@ Vagrant.configure(2) do |config|
 
   {
     # 'solr'  => '10.7.7.103',
-    # 'db'    => '10.7.7.102',
-    'sufia'   => '10.7.7.101'
+    'deploy'  => '10.7.7.102',
+    'build'   => '10.7.7.101'
   }.each do |short_name, ip|
     config.vm.define short_name do |host|
       host.vm.network 'private_network', ip: ip
@@ -42,22 +43,26 @@ Vagrant.configure(2) do |config|
         # vb.cpus   = 2
         vb.linked_clone = true
 
-        # NOTE: will need refactoring if separating into multiple VMs
-        # port forwarding solr:
-        host.vm.network "forwarded_port", guest: 8983, host: 8983, auto_correct: true
-        # port forwarding fedora (via tomcat):
-        host.vm.network "forwarded_port", guest: 8080, host: 8888, auto_correct: true
-        # port forwarding postgres
-        host.vm.network "forwarded_port", guest: 5432, host: 5432, auto_correct: true
-        # port forwarding sufia (puma):
-        host.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
-        # port forwarding sufia (http):
-        host.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
-        # port forwarding sufia (https):
-        host.vm.network "forwarded_port", guest: 443, host: 4443, auto_correct: true
+        if short_name == "build"
+          # port forwarding solr:
+          host.vm.network "forwarded_port", guest: 8983, host: 8983, auto_correct: true
+          # port forwarding fedora (via tomcat):
+          host.vm.network "forwarded_port", guest: 8080, host: 8888, auto_correct: true
+          # port forwarding postgres
+          host.vm.network "forwarded_port", guest: 5432, host: 5432, auto_correct: true
+          # port forwarding sufia (http):
+          # host.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+          # port forwarding sufia (https):
+          # host.vm.network "forwarded_port", guest: 443, host: 4443, auto_correct: true
+        end
+
+        if short_name == "build"
+          # port forwarding sufia (puma):
+          host.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+        end
       end
 
-      if short_name == "sufia" # last in the list
+      if short_name == "deploy" # last in the list
         setup_complete = true
       end
 
@@ -79,7 +84,13 @@ Vagrant.configure(2) do |config|
         # NOTE: nfs synced_folder is broken in vagrant 1.9.1.
         # must downgrade to 1.9.0 for this to work
         # https://github.com/mitchellh/vagrant/issues/8138
-        host.vm.synced_folder "project-code", "#{deploy_dir}", type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'], map_uid: 0, map_gid: 0
+        if short_name == "deploy"
+          host.vm.synced_folder "project-code/deploy", "#{deploy_dir}", type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'], map_uid: 0, map_gid: 0
+        end
+
+        if short_name == "build"
+          host.vm.synced_folder "project-code/build", "#{build_dir}", type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'], map_uid: 0, map_gid: 0
+        end
       end
     end
   end

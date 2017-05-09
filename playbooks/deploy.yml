@@ -1,0 +1,15 @@
+---
+- hosts: deploy
+  become: false
+  environment:
+    RAILS_ENV: "{{ rails_env }}"
+
+  roles:
+  - { role: apache }
+  - { role: passenger }
+  
+  # FIXME: re-running this after installing passenger simply to re-symlink
+  # our built ruby over passenger's yum-installed older version
+  - { role: ruby, ruby_from_source: true }
+
+  - { role: hyrax }
