@@ -12,17 +12,18 @@ tomcat_users:           "{{ vault_tomcat_users }}"
 # TODO: app_base_deploy_dir (?)
 # cross-role vars
 # sufia_base_deploy_dir:      "/var/www/html"
-sufia_base_build_dir:       "/home/deploy/build"
+sufia_base_build_dir:       "/home/{{ login_user }}/build"
 
 # ruby vars
 ruby_from_source:       true
 
 # sufia role vars
+hydra_from_template:    true
 sufia_version:          "7.3.0" # 7.2.0 | 7.3.0.rc1
 sufia_mode:             "dev" # dev | prod_like
-sufia_rebuild:          false
+sufia_rebuild:          true
 sufia_redeploy:         true
-build_app:              false
+build_app:              true
 get_app:                false
 # NOTE: this particular override works for version 7.3.x, but not 7.2.x (which has additional requirements)
 # sufia_gems:             "gem 'sufia', '{{ sufia_version }}'"
