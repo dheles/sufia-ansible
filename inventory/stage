@@ -1,0 +1,16 @@
+# stage:
+# ------------------
+[stage]
+ir-stage.mse.jhu.edu
+
+[db]
+ir-stage.mse.jhu.edu
+
+[solr]
+ir-stage.mse.jhu.edu
+
+[fedora]
+ir-stage.mse.jhu.edu
+
+[app:children]
+stage
