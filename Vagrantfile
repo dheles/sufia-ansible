@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
         # vb.cpus   = 2
         vb.linked_clone = true
 
-        if short_name == "build"
+        if short_name == "deploy"
           # port forwarding solr:
           host.vm.network "forwarded_port", guest: 8983, host: 8983, auto_correct: true
           # port forwarding fedora (via tomcat):
@@ -62,7 +62,7 @@ Vagrant.configure(2) do |config|
         end
       end
 
-      if short_name == "deploy" # last in the list
+      if short_name == "build" # last in the list
         setup_complete = true
       end
 
@@ -89,7 +89,12 @@ Vagrant.configure(2) do |config|
         end
 
         if short_name == "build"
-          host.vm.synced_folder "project-code/build", "#{build_dir}", type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'], map_uid: 0, map_gid: 0
+          host.vm.synced_folder "project-code/build",
+            "#{build_dir}",
+            nfs: true,
+            mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'],
+            nfs_udp: false,
+            map_uid: 501, map_gid: 1001
         end
       end
     end
