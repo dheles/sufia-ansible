@@ -85,15 +85,19 @@ Vagrant.configure(2) do |config|
         # must downgrade to 1.9.0 for this to work
         # https://github.com/mitchellh/vagrant/issues/8138
         if short_name == "deploy"
-          host.vm.synced_folder "project-code/deploy", "#{deploy_dir}", type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'], map_uid: 0, map_gid: 0
+          host.vm.synced_folder "project-code/deploy",
+            "#{deploy_dir}",
+            type: 'nfs',
+            mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'],
+            map_uid: 0, map_gid: 0
         end
 
         if short_name == "build"
           host.vm.synced_folder "project-code/build",
             "#{build_dir}",
-            nfs: true,
+            type: 'nfs',
             mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'],
-            nfs_udp: false,
+            # nfs_udp: false,
             map_uid: 501, map_gid: 1001
         end
       end
