@@ -22,13 +22,15 @@ login_group_gid:        1001
 ruby_from_source:       true
 
 # sufia role vars
+hydra_head_type:        "hyrax"
+hydra_head_version:     "1.0.0.rc2"
 hydra_from_template:    true
-sufia_version:          "7.3.0" # 7.2.0 | 7.3.0.rc1
 sufia_mode:             "dev" # dev | prod_like
 sufia_rebuild:          true
 sufia_redeploy:         true
 build_app:              true
 get_app:                false
+sufia_breaking_stuff_is_ok: true
 # NOTE: this particular override works for version 7.3.x, but not 7.2.x (which has additional requirements)
 # sufia_gems:             "gem 'sufia', '{{ sufia_version }}'"
 
