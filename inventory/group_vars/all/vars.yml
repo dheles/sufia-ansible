@@ -21,6 +21,7 @@ app_user:         "{{ app_name }}"
 app_repo:         "https://github.com/dheles/hyrax-JHU"
 app_branch:       "master"
 base_deploy_dir:  "/opt"
+sufia_admin_email: "dheles@jhu.edu"
 # deploy_dir:       "{{ base_deploy_dir }}/{{ app_name }}"
 
 # FIXME: temporarily use a mirror for libreoffice
