@@ -27,3 +27,6 @@ sufia_admin_email: "dheles@jhu.edu"
 # FIXME: temporarily use a mirror for libreoffice
 libreoffice_url:                  "http://mirror.clarkson.edu/tdf/libreoffice/stable/{{ libreoffice_version }}/{{ package }}/{{ architecture }}/{{ libreoffice_download_file }}"
 libreoffice_checksum_override:    "3afba7609147da7af5aa7a0de547d8ee7b7c2f639e7e20da42bc924ea4c13b1b"
+
+fits_version:     "1.0.5"
+fits_checksum:    "e746b7cbf3c584930a559891657393865580fc51"
