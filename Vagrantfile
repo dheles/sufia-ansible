@@ -5,6 +5,8 @@ domain          = "hyrax.test"
 setup_complete  = false
 build_dir       = "/home/deploy/build"
 deploy_dir      = "/var/www/html"
+local_user_id   = 501
+local_group_id  = 1100
 
 # NOTE: currently using the same OS for all boxen
 OS="centos" # "debian" || "centos"
@@ -45,60 +47,77 @@ Vagrant.configure(2) do |config|
 
         if short_name == "deploy"
           # port forwarding solr:
-          host.vm.network "forwarded_port", guest: 8983, host: 8983, auto_correct: true
+          host.vm.network "forwarded_port", guest: 8983, host: 28983, auto_correct: true
           # port forwarding fedora (via tomcat):
-          host.vm.network "forwarded_port", guest: 8080, host: 8888, auto_correct: true
+          host.vm.network "forwarded_port", guest: 8080, host: 28080, auto_correct: true
           # port forwarding postgres
-          host.vm.network "forwarded_port", guest: 5432, host: 5432, auto_correct: true
+          host.vm.network "forwarded_port", guest: 5432, host: 25432, auto_correct: true
           # port forwarding sufia (http):
           # host.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
           # port forwarding sufia (https):
           # host.vm.network "forwarded_port", guest: 443, host: 4443, auto_correct: true
+
+          # NOTE: nfs synced_folder is broken in vagrant 1.9.1.
+          # must downgrade to 1.9.0 for this to work
+          # https://github.com/mitchellh/vagrant/issues/8138
+          # host.vm.synced_folder "project-code/deploy",
+          #   "#{deploy_dir}",
+          #   type: 'nfs',
+          #   mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'],
+          #   map_uid: 0,
+          #   map_gid: 0,
+          #   create: true
+            # Shared folders that have NFS enabled do not support owner/group attributes
+            # anyway, they are unnecessary, as Vagrant picks up map_uid & map_gid
+            # ...unreliably, it turns out
+            # owner: "#{local_user_id}",
+            # group: "#{local_group_id}"
+
+          if OS=="centos"
+            # workaround for https://github.com/mitchellh/vagrant/issues/8142
+            host.vm.provision "shell",
+              inline: "sudo service network restart"
+          end
         end
 
         if short_name == "build"
           # port forwarding sufia (puma):
-          host.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+          host.vm.network "forwarded_port", guest: 3000, host: 13000, auto_correct: true
+          # port forwarding solr:
+          host.vm.network "forwarded_port", guest: 8983, host: 18983, auto_correct: true
+          # port forwarding fedora (via tomcat):
+          host.vm.network "forwarded_port", guest: 8984, host: 18984, auto_correct: true
+          # port forwarding postgres
+          host.vm.network "forwarded_port", guest: 5432, host: 15432, auto_correct: true
+
+          host.vm.synced_folder "project-code/build",
+            "#{build_dir}",
+            type: 'nfs',
+            mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'],
+            # nfs_udp: false,
+            map_uid: "#{local_user_id}",
+            map_gid: "#{local_group_id}",
+            create: true
+
+          if OS=="centos"
+            # workaround for https://github.com/mitchellh/vagrant/issues/8142
+            host.vm.provision "shell",
+              inline: "sudo service network restart"
+          end
         end
       end
 
-      if short_name == "build" # last in the list
+      if short_name == "deploy" # last in the list
         setup_complete = true
       end
 
       if setup_complete
-        if OS=="centos"
-          # workaround for https://github.com/mitchellh/vagrant/issues/8142
-          host.vm.provision "shell",
-            inline: "sudo service network restart"
-        end
-
         host.vm.provision "ansible" do |ansible|
           ansible.galaxy_role_file = "requirements.yml"
           ansible.inventory_path = "inventory/vagrant"
           ansible.playbook = "setup.yml"
           ansible.limit = "all"
           # ansible.verbose ="vvv"
-        end
-
-        # NOTE: nfs synced_folder is broken in vagrant 1.9.1.
-        # must downgrade to 1.9.0 for this to work
-        # https://github.com/mitchellh/vagrant/issues/8138
-        if short_name == "deploy"
-          host.vm.synced_folder "project-code/deploy",
-            "#{deploy_dir}",
-            type: 'nfs',
-            mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'],
-            map_uid: 0, map_gid: 0
-        end
-
-        if short_name == "build"
-          host.vm.synced_folder "project-code/build",
-            "#{build_dir}",
-            type: 'nfs',
-            mount_options: ['rw', 'vers=3', 'tcp', 'fsc' ,'actimeo=1'],
-            # nfs_udp: false,
-            map_uid: 501, map_gid: 1001
         end
       end
     end
