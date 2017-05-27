@@ -14,3 +14,6 @@ ir-stage.mse.jhu.edu
 
 [app:children]
 stage
+
+[deploy:children]
+stage
