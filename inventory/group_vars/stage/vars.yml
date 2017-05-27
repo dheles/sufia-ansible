@@ -33,7 +33,7 @@ db_admin_user:          "postgres"
 db_create_users:        true
  # TODO: review - is there an expected db username?
 db_users:
-  - user:               "hyrax"
+  - user:               "sufia"
     pass:               "{{ vault_db_password }}"
     flags:              "CREATEDB,NOSUPERUSER"
 db_create_databases:    true
@@ -44,9 +44,9 @@ db_databases:
   # - name:               "sufia_test"
   #   encoding:           "UTF-8"
   #   owner:              "sufia"
-  - name:               "hyrax_production"
+  - name:               "sufia_production"
     encoding:           "UTF-8"
-    owner:              "hyrax"
+    owner:              "sufia"
 postgres_hba_entries:
   # - type:               "local"
   #   database:           "sufia_development"
@@ -59,8 +59,8 @@ postgres_hba_entries:
   #   address:            ""
   #   method:             "md5"
   - type:               "local"
-    database:           "hyrax_production"
-    user:               "hyrax"
+    database:           "sufia_production"
+    user:               "sufia"
     address:            ""
     method:             "md5"
 
