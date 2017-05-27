@@ -88,7 +88,7 @@ update_packages: false
 passenger_app_environment:  "production"
 
 # fedora vars
-fcrepo_version:         4.7.1
+fcrepo_version:         4.7.0
 
 # tomcat vars
 tomcat_major_version:   7
