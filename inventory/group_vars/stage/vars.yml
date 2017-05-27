@@ -84,7 +84,7 @@ ssl_self_sign_cert:     true
 update_packages: false
 
 # fedora vars
-fcrepo_version:         4.7.1
+fcrepo_version:         4.7.0
 
 # tomcat vars
 tomcat_major_version:   7
