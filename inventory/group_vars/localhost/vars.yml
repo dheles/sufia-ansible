@@ -1,0 +1,10 @@
+# homebrew vars:
+homebrew_installed_packages:
+  - { name: imagemagick, install_options: "with-openjpeg" }
+  - fits@1.0.5
+homebrew_cask_apps:
+  - java
+homebrew_taps:
+  - homebrew/core
+  - caskroom/cask
+  - dheles/homebrew-fits-alternate
