@@ -1,0 +1,39 @@
+# homebrew vars:
+homebrew_installed_packages:
+  - { name: imagemagick, install_options: "with-openjpeg" }
+  - fits@1.0.5
+  - redis
+  - ghostscript
+  - nodejs
+  - openssl
+  - rbenv
+  - ruby-build
+  - { name: ffmpeg, install_options: "with-fdk-aac, with-libvpx, with-libvorbis" }
+homebrew_cask_apps:
+  - java
+  - libreoffice
+homebrew_taps:
+  - homebrew/core
+  - caskroom/cask
+  - dheles/homebrew-fits-alternate
+
+# ruby vars:
+ruby_version: "2.3.4"
+
+# samvera vars:
+rails_env:                  "development"
+hydra_head_type:            "hyrax"
+hydra_head_version:         "1.0.1"
+hydra_head_gem:             "gem 'hyrax', github: 'dheles/hyrax', branch: 'master'"
+sufia_mode:                 "dev" # dev | prod_like
+sufia_rebuild:              true
+sufia_redeploy:             true
+sufia_build_app:            true
+sufia_get_app:              false
+hydra_from_template:        false
+sufia_breaking_stuff_is_ok: true
+sufia_base_build_dir:       "~/Source"
+sufia_db_provider:          "sqlite3"
+debugging:
+sufia_app_name:             "sufia"
+sufia_build_dir:            "{{ sufia_base_build_dir }}/{{ sufia_app_name }}"

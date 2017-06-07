@@ -1,0 +1,44 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+  - block:
+    - name: start redis
+      shell: screen -S redis -dm bash -c "redis-server >& log/redis.log"
+      args:
+        chdir: "{{ sufia_build_dir }}"
+      async: 30
+      poll: 0
+      # become_user: "{{ app_user }}"
+      # when: sufia_mode == "dev"
+
+    - name: start solr
+      shell: screen -S solr -dm bash -c "solr_wrapper --config .solr_wrapper >& log/solr.log"
+      args:
+        chdir: "{{ sufia_build_dir }}"
+      async: 30
+      poll: 0
+
+    - name: start fcrepo
+      shell: screen -S fcrepo -dm bash -c "fcrepo_wrapper --config .fcrepo_wrapper >& log/fcrepo.log"
+      args:
+        chdir: "{{ sufia_build_dir }}"
+      async: 30
+      poll: 0
+
+    - name: start rails
+      shell: screen -S rails -dm bash -c "bundle exec rails server >& log/rails.log"
+      args:
+        chdir: "{{ sufia_build_dir }}"
+      async: 30
+      poll: 0
+
+    # - name: start servers
+    #   shell: screen -S hydraserver -dm bash -c "bundle exec rails hydra:server >& log/sufia.log"
+    #   args:
+    #     chdir: "{{ sufia_build_dir }}"
+    #   async: 30
+    #   poll: 0
+      # become_user: "{{ app_user }}"
+    when: sufia_mode == "dev"

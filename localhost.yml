@@ -1,0 +1,3 @@
+---
+- include: playbooks/local_prereqs.yml
+- include: playbooks/build.yml

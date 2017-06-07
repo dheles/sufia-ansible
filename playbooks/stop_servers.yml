@@ -1,0 +1,38 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+  - name: "stop server servers running in screens"
+    shell: "screen -S {{ item }} -X quit"
+    args:
+      chdir: "{{ sufia_build_dir }}"
+    failed_when: false
+    with_items:
+      - solr
+      - fcrepo
+      - redis
+      - rails
+
+    # TODO: port numbers are configurable and should thus be in vars
+  - name: get PIDs of any servers still running
+    command: "lsof -t -i:{{ item }}"
+    with_items:
+      - 8983
+      - 8984
+      - 3000
+      - 6379
+    failed_when: false
+    changed_when: PID_list.stdout is number # doesn't work. nor does: | isnan
+    register: PID_list
+
+  - debug:
+      var: PID_list
+
+  # FIXME: looks like my use of screen isn't working as well as i'd like (at least on macOS)
+  # TODO: troubleshoot and get rid of this brute-force (as i'm not sure things really get cleaned up this way)
+  # TODO: port numbers are configurable and should thus be in vars
+  - name: make ugly sure servers are stopped
+    command: "kill -9 {{ item.stdout }}"
+    when: item.rc == 0
+    with_items: "{{ PID_list.results }}"

@@ -52,3 +52,5 @@
 
 - src: https://github.com/dheles/hyrax-ansible-role.git
   name: hyrax
+
+- name: geerlingguy.homebrew

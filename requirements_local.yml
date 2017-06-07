@@ -1,0 +1,59 @@
+---
+# REM: maunally install before using with
+# $ ansible-galaxy install -r requirements_local.yml
+
+# - src: https://github.com/dheles/ansible-role-login-user
+#   name: login-user
+#
+# - src: https://github.com/dheles/ansible-role-secure-ssh
+#   name: secure-ssh
+#
+# - src: https://github.com/dheles/ansible-role-postgres.git
+#   name: postgres
+#
+# - src: https://github.com/dheles/ansible-role-java.git
+#   name: java
+#
+# - src: https://github.com/dheles/ansible-role-solr.git
+#   name: solr
+#
+# - src: https://github.com/dheles/ansible-role-tomcat.git
+#   name: tomcat
+#
+# - src: https://github.com/dheles/ansible-role-psi-probe.git
+#   name: psi-probe
+#
+# - src: https://github.com/dheles/ansible-role-fcrepo.git
+#   name: fcrepo
+#
+# - src: https://github.com/dheles/ansible-role-redis.git
+#   name: redis
+#
+# - src: https://github.com/dheles/ansible-role-imagemagick.git
+#   name: imagemagick
+
+# - src: https://github.com/dheles/ansible-role-fits.git
+#   name: fits
+
+# - src: https://github.com/dheles/ansible-role-libreoffice.git
+#   name: libreoffice
+#
+# - src: https://github.com/dheles/ansible-role-ruby.git
+#   name: ruby
+#
+# - src: https://github.com/dheles/ansible-role-apache.git
+#   name: apache
+#
+# - src: https://github.com/dheles/ansible-role-passenger.git
+#   name: passenger
+#
+# # - src: https://github.com/dheles/ansible-role-sufia.git
+# #   name: sufia
+#
+# - src: https://github.com/dheles/hyrax-ansible-role.git
+#   name: hyrax
+
+- name: geerlingguy.homebrew
+
+# - src: https://github.com/dheles/hyrax-ansible-role.git
+#   name: hyrax
